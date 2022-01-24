@@ -1,0 +1,30 @@
+{
+  "name": "lloc/gutenberg-mvp",
+  "description": "Gutenberg MVP",
+  "type": "wordpress-plugin",
+  "license": "GPL-2.0-or-later",
+  "homepage": "http://lloc.de",
+  "require": {
+    "php": ">=7.2",
+    "composer/installers": "~1.11.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Gmvp\\": "includes/Gmvp"
+    }
+  },
+  "authors": [
+    {
+      "name": "Dennis Ploetner",
+      "email": "re@lloc.de",
+      "homepage": "http://lloc.de"
+    }
+  ],
+  "keywords": [
+    "gutenberg",
+    "mvp",
+    "block",
+    "schortcode",
+    "widgets"
+  ]
+}
