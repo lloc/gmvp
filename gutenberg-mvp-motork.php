@@ -33,4 +33,10 @@ if ( file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
 define( 'GMVP_PLUGIN_PATH', plugin_basename( __FILE__ ) );
 define( 'GMVP_PLUGIN__FILE__', __FILE__ );
 
+/**
+ * Gutenberg should be active
+ */
+add_filter( 'use_block_editor_for_post', '__return_true', 99 );
+add_filter( 'use_block_editor_for_post_type', '__return_true', 99 );
+
 Gmvp\Plugin::init();
