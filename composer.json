@@ -13,6 +13,15 @@
       "Gmvp\\": "includes/Gmvp"
     }
   },
+  "autoload-dev": {
+    "psr-4": {
+      "GmvpTests\\": "tests/"
+    }
+  },
+  "scripts": {
+    "test": "./vendor/bin/phpunit",
+    "coverage": "./vendor/bin/phpunit --coverage-html ./reports/php/coverage"
+  },
   "authors": [
     {
       "name": "Dennis Ploetner",
@@ -26,5 +35,9 @@
     "block",
     "schortcode",
     "widgets"
-  ]
+  ],
+  "require-dev": {
+    "brain/monkey": "2.*",
+    "phpunit/phpunit": "^9.5"
+  }
 }
