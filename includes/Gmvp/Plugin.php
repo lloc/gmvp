@@ -4,28 +4,43 @@ namespace Gmvp;
 
 class Plugin {
 
-	public static function init() {
+	/**
+	 * @return Plugin
+	 */
+	public static function init(): Plugin {
 		add_action( 'plugins_loaded', [ __CLASS__, 'init_i18n_support' ] );
+		add_action( 'widgets_init', [ __CLASS__, 'init_widget' ] );
+		add_action( 'init', [ __CLASS__, 'block_init' ] );
 
 		add_shortcode( 'sc_msls_widget', [ __CLASS__, 'block_render' ] );
-		add_action( 'widgets_init', [ __CLASS__, 'init_widget' ] );
-
-		if ( function_exists( 'register_block_type' ) ) {
-			add_action( 'init', [ __CLASS__, 'block_init' ] );
-		}
 
 		return new self();
 	}
 
-	public function init_i18n_support() {
+	/**
+	 * @return bool
+	 */
+	public function init_i18n_support(): bool {
 		return load_plugin_textdomain( 'gmvp', false, self::dirname( '/languages/' ) );
 	}
 
-	public function init_widget() {
+	/**
+	 * @codeCoverageIgnore
+	 *
+	 * @return void
+	 */
+	public function init_widget(): void {
 		register_widget( Widget::class );
 	}
 
-	public function block_init() {
+	/**
+	 * @return bool
+	 */
+	public function block_init(): bool {
+		if ( ! function_exists( 'register_block_type' ) ) {
+			return false;
+		}
+
 		$handle   = 'gmvp-widget-block';
 
 		wp_register_script(
@@ -39,26 +54,47 @@ class Plugin {
 			'editor_script'   => $handle,
 			'render_callback' => [ $this, 'block_render' ],
 		] );
+
+		return true;
 	}
 
-	public function block_render() {
+	/**
+	 * @return string
+	 */
+	public function block_render(): string {
 		ob_start();
 		the_widget( Widget::class );
 		return ob_get_clean();
 	}
 
+	/**
+	 * @param string $path
+	 *
+	 * @return string
+	 */
 	public static function plugins_url( string $path ): string {
 		return plugins_url( $path, self::file() );
 	}
 
+	/**
+	 * @param string $path
+	 *
+	 * @return string
+	 */
 	public static function dirname( string $path ): string {
 		return dirname( self::path() ) . $path;
 	}
 
+	/**
+	 * @return string
+	 */
 	public static function file(): string {
 		return defined( 'GMVP_PLUGIN__FILE__' ) ? constant( 'GMVP_PLUGIN__FILE__' ) : '';
 	}
 
+	/**
+	 * @return string
+	 */
 	public static function path(): string {
 		return defined( 'GMVP_PLUGIN_PATH' ) ? constant( 'GMVP_PLUGIN_PATH' ) : '';
 	}

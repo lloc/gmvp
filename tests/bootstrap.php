@@ -4,9 +4,8 @@ namespace GmvpTests;
 
 use PHPUnit\Framework\TestCase;
 use Brain\Monkey;
-use Brain\Monkey\Functions;
 
-class Msls_UnitTestCase extends TestCase {
+class Gmvp_UnitTestCase extends TestCase {
 
 	protected function setUp(): void {
 		parent::setUp();
