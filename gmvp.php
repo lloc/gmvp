@@ -4,7 +4,7 @@
  *
  * Plugin Name: Gutenberg MVP
  * Version: 0.0.1
- * Plugin URI: http://motork.io/
+ * Plugin URI: https://github.com/lloc/gmvp
  * Description: MVP - Using Gutenberg from a PHP developer's perspective
  * Author: Dennis Ploetner
  * Author URI: http://lloc.de/

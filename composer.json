@@ -37,7 +37,7 @@
     "widgets"
   ],
   "require-dev": {
-    "brain/monkey": "2.*",
-    "phpunit/phpunit": "^9.5"
+    "phpunit/phpunit": "^9.5",
+    "brain/monkey": "2.*"
   }
 }
