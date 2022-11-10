@@ -5,15 +5,15 @@ namespace Gmvp;
 class Widget extends \WP_Widget {
 
 	public $id_base = 'gmvpwidget';
+	public $name    = 'Gutenberg MVP';
 
+	/**
+	 * Constructor
+	 *
+	 * @codeCoverageIgnore
+	 */
 	public function __construct() {
-		parent::__construct( 
-			$this->id_base, 
-			apply_filters(
-				'gmvp_widget_title',
-				__( 'Gutenberg MVP', 'gmvp' )
-			)
-		);
+		parent::__construct( $this->id_base, $this->name );
 	}
 
 	/**
@@ -34,13 +34,7 @@ class Widget extends \WP_Widget {
 		);
 
 		/** This filter is documented in wp-includes/default-widgets.php */
-		$title = apply_filters(
-			'widget_title',
-			( isset( $instance['title'] ) ? $instance['title'] : '' ),
-			$instance,
-			$this->id_base
-		);
-
+		$title = apply_filters( 'widget_title', $instance['title'] ?? '', $instance, $this->id_base );
 		if ( $title ) {
 			$title = $args['before_title'] . esc_attr( $title ) . $args['after_title'];
 		}
@@ -72,8 +66,10 @@ class Widget extends \WP_Widget {
 	 * Display an input-form in the backend
 	 *
 	 * @param array $instance
+	 *
+	 * @return string
 	 */
-	public function form( $instance ) {
+	public function form( $instance ): string {
 		printf(
 			'<p><label for="%1$s">%2$s:</label> <input class="widefat" id="%1$s" name="%3$s" type="text" value="%4$s" /></p>',
 			$this->get_field_id( 'title' ),
@@ -81,6 +77,8 @@ class Widget extends \WP_Widget {
 			$this->get_field_name( 'title' ),
 			( isset( $instance['title'] ) ? esc_attr( $instance['title'] ) : '' )
 		);
+
+		return $this->id_base;
 	}
 
 }

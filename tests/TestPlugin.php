@@ -4,7 +4,6 @@ namespace GmvpTests;
 
 use Gmvp\Plugin;
 use Brain\Monkey\Functions;
-use Throwable;
 
 class TestPlugin extends Gmvp_UnitTestCase {
 
@@ -45,7 +44,6 @@ class TestPlugin extends Gmvp_UnitTestCase {
 	}
 
 	public function test_block_init_true() {
-		Functions\when( 'plugins_url' )->justReturn( 'test/abc' );
 		Functions\expect( 'register_block_type' )->once();
 		Functions\expect( 'wp_register_script' )->once();
 
