@@ -10,11 +10,13 @@ class TestPlugin extends Gmvp_UnitTestCase {
 	public function test_init() {
 		Functions\expect( 'add_shortcode' )->once();
 
-		$this->assertInstanceOf( Plugin::class, Plugin::init() );
+		$obj = Plugin::init();
 
-		$this->assertEquals( 10, has_action( 'plugins_loaded', [ Plugin::class, 'init_i18n_support' ] ) );
-		$this->assertEquals( 10, has_action( 'widgets_init', [ Plugin::class, 'init_widget' ] ) );
-		$this->assertEquals( 10, has_action( 'init', [ Plugin::class, 'block_init' ] ) );
+		$this->assertInstanceOf( Plugin::class, $obj );
+
+		$this->assertEquals( 10, has_action( 'plugins_loaded', [ $obj, 'init_i18n_support' ] ) );
+		$this->assertEquals( 10, has_action( 'widgets_init', [ $obj, 'init_widget' ] ) );
+		$this->assertEquals( 10, has_action( 'init', [ $obj, 'block_init' ] ) );
 	}
 
 	public function test_init_i18n_support() {
@@ -44,6 +46,7 @@ class TestPlugin extends Gmvp_UnitTestCase {
 	}
 
 	public function test_block_init_true() {
+		Functions\when( 'plugins_url' )->justReturn( 'test/abc' );
 		Functions\expect( 'register_block_type' )->once();
 		Functions\expect( 'wp_register_script' )->once();
 
