@@ -13,8 +13,7 @@ class Gmvp_UnitTestCase extends TestCase {
 		Monkey\setUp();
 
 		Functions\when( 'plugins_url' )->justReturn( 'test/abc' );
-		Functions\when( 'esc_attr' )->returnArg();
-		Functions\when( '__' )->returnArg();
+		Functions\stubs( [ 'esc_attr', '__' ] );
 
 	}
 

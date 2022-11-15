@@ -8,11 +8,13 @@ class Plugin {
 	 * @return Plugin
 	 */
 	public static function init(): Plugin {
-		add_action( 'plugins_loaded', [ __CLASS__, 'init_i18n_support' ] );
-		add_action( 'widgets_init', [ __CLASS__, 'init_widget' ] );
-		add_action( 'init', [ __CLASS__, 'block_init' ] );
+		$obj = new self();
 
-		add_shortcode( 'sc_msls_widget', [ __CLASS__, 'block_render' ] );
+		add_action( 'plugins_loaded', [ $obj, 'init_i18n_support' ] );
+		add_action( 'widgets_init', [ $obj, 'init_widget' ] );
+		add_action( 'init', [ $obj, 'block_init' ] );
+
+		add_shortcode( 'sc_msls_widget', [ $obj, 'block_render' ] );
 
 		return new self();
 	}

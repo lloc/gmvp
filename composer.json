@@ -20,7 +20,8 @@
   },
   "scripts": {
     "test": "./vendor/bin/phpunit",
-    "coverage": "./vendor/bin/phpunit --coverage-html ./reports/php/coverage"
+    "coverage": "./vendor/bin/phpunit --coverage-html ./reports/php/coverage",
+    "analyze": "./vendor/bin/phpstan analyze"
   },
   "authors": [
     {
